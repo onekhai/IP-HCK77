@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
-const port = 3000;
+// const port = 3000;
 
 // const router = require("./routes");
 const UserController = require("./controllers/UserController");
@@ -40,6 +40,4 @@ app.delete("/myList/:id", guardUser, MyListController.deleteMyList);
 // Error Handler
 app.use(errorHandler);
 
-app.listen(port, () => {
-    console.log(`Running on port ${port}`);
-});
+module.exports = app
