@@ -21,19 +21,21 @@ module.exports = class MyListController {
             const { GameId } = req.body;
             const UserId = req.user.id;
             // console.log({ gameId });
-            
+
             const gameExists = await Game.findByPk(GameId);
             if (!gameExists) {
-                return res
-                    .status(404)
-                    .json({ message: "Game not found" });
+                next({
+                    name: "NotFound",
+                    message: "Game not found",
+                });
             }
 
             const exists = await MyList.findOne({ where: { UserId, GameId } });
             if (exists) {
-                return res
-                    .status(400)
-                    .json({ message: "Game already in list" });
+                next({
+                    name: "BadRequest",
+                    message: "Game already in list",
+                });
             }
 
             const myList = await MyList.create({ UserId, GameId });
@@ -50,10 +52,10 @@ module.exports = class MyListController {
             // const updateData = req.body;
             const myList = await MyList.findByPk(id);
             if (!myList) {
-                throw {
+                next({
                     name: "NotFound",
                     message: "My list not found",
-                };
+                });
             }
 
             await myList.update(req.body, {
@@ -75,10 +77,10 @@ module.exports = class MyListController {
             const myList = await MyList.findByPk(id);
 
             if (!myList) {
-                throw {
+                next({
                     name: "NotFound",
                     message: `MyList id:${id} not found`,
-                };
+                });
             }
 
             await myList.destroy();
