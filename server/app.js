@@ -15,11 +15,15 @@ const authentication = require("./middlewares/authentication");
 const MyListController = require("./controllers/MyListController");
 const { errorHandler } = require("./middlewares/errorHandler");
 const guardUser = require("./middlewares/guardUser");
+const crossOrigin = require("./middlewares/cors");
 
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // app.use(router);
+
+app.use(crossOrigin);
 
 // User Endpoints
 app.post("/register", UserController.register);
@@ -40,4 +44,4 @@ app.delete("/myList/:id", guardUser, MyListController.deleteMyList);
 // Error Handler
 app.use(errorHandler);
 
-module.exports = app
+module.exports = app;
