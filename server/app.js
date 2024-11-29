@@ -17,13 +17,13 @@ const { errorHandler } = require("./middlewares/errorHandler");
 const guardUser = require("./middlewares/guardUser");
 const crossOrigin = require("./middlewares/cors");
 
-app.use(cors());
+// app.use(cors());
+app.use(crossOrigin);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // app.use(router);
 
-app.use(crossOrigin);
 
 // User Endpoints
 app.post("/register", UserController.register);
