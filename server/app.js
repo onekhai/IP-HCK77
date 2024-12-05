@@ -16,6 +16,7 @@ const MyListController = require("./controllers/MyListController");
 const { errorHandler } = require("./middlewares/errorHandler");
 const guardUser = require("./middlewares/guardUser");
 const crossOrigin = require("./middlewares/cors");
+// const cors = require("cors");
 
 // app.use(cors());
 app.use(crossOrigin);
@@ -24,13 +25,13 @@ app.use(express.json());
 
 // app.use(router);
 
-
 // User Endpoints
 app.post("/register", UserController.register);
 app.post("/login", UserController.login);
 
 // Games Endpoints
 app.get("/games", GameController.getGames);
+app.get("/games/:id", GameController.getById);
 
 // MyList Endpoints
 app.use(authentication);
