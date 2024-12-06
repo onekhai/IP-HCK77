@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
+const cors = require("cors");
 // const port = 3000;
 
 // const router = require("./routes");
@@ -16,18 +17,18 @@ const MyListController = require("./controllers/MyListController");
 const { errorHandler } = require("./middlewares/errorHandler");
 const guardUser = require("./middlewares/guardUser");
 const crossOrigin = require("./middlewares/cors");
-// const cors = require("cors");
 
-// app.use(cors());
-app.use(crossOrigin);
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(crossOrigin);
 
 // app.use(router);
 
 // User Endpoints
 app.post("/register", UserController.register);
 app.post("/login", UserController.login);
+app.post("/google-login", UserController.googleLogin)
 
 // Games Endpoints
 app.get("/games", GameController.getGames);

@@ -2,6 +2,8 @@ const { User } = require("../models");
 const { verifyToken } = require("../helpers/jwt");
 
 module.exports = async function authentication(req, res, next) {
+    console.log("auth");
+
     const bearerToken = req.headers["authorization"];
     if (!bearerToken) {
         next({ name: "Unauthorized", message: "Invalid Token" });
