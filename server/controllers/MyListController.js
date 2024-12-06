@@ -28,6 +28,7 @@ module.exports = class MyListController {
                     name: "NotFound",
                     message: "Game not found",
                 });
+                return
             }
 
             const exists = await MyList.findOne({ where: { UserId, GameId } });
@@ -36,6 +37,7 @@ module.exports = class MyListController {
                     name: "BadRequest",
                     message: "Game already in list",
                 });
+                return
             }
 
             const myList = await MyList.create({ UserId, GameId });
@@ -56,6 +58,7 @@ module.exports = class MyListController {
                     name: "NotFound",
                     message: "My list not found",
                 });
+                return
             }
 
             await myList.update(req.body, {
@@ -81,6 +84,7 @@ module.exports = class MyListController {
                     name: "NotFound",
                     message: `MyList id:${id} not found`,
                 });
+                return
             }
 
             await myList.destroy();

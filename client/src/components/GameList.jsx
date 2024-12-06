@@ -22,7 +22,7 @@ export default function GameList({ game, handleOnAdd }) {
                     </p>
                 </div>
                 <button
-                    onClick={handleOnAdd}
+                    onClick={(e) => handleOnAdd(e, game)}
                     className="bg-cyan-400 hover:bg-cyan-300 text-black px-2 py-1 rounded-md font-medium"
                 >
                     +

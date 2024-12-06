@@ -11,4 +11,15 @@ module.exports = class GameController {
             next(err);
         }
     }
+
+    static async getById(req, res, next) {
+        try {
+            const { id } = req.params
+            const games = await Game.findByPk(id);
+            res.status(200).json(games);
+        } catch (err) {
+            console.log("🚀 ~ getCategory ~ err:", err);
+            next(err);
+        }
+    }
 };
